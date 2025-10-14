@@ -125,28 +125,39 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+  }
+  
+  /* Apply Geist font to all text elements except headings and nav links */
+  body, p, div, span, button, input, textarea, select, label, li, td, th {
+    font-family: var(--font-geist-sans), sans-serif;
+    font-size: 1.125rem; /* 18px */
+  }
+  
+  /* Keep Dummy font for headings and navigation links */
+  h1, h2, h3, h4, h5, h6, nav a {
     font-family: 'Dummy', sans-serif;
   }
+  
   body {
     @apply bg-background text-foreground;
-    font-size: 1.125rem;
+    font-size: 1.125rem; /* 18px */
     letter-spacing: normal;
   }
+  
   h1, h2, h3, h4, h5, h6, button, nav {
     letter-spacing: 0.05em;
   }
+  
   p {
     color: blue;
   }
+  
   a {
     color: yellow;
   }
+  
   nav a, h1 a {
     color: white;
   }
-  .page-text-24 .page-content p,
-  .page-text-24 .page-content a {
-    font-size: 24px;
-    letter-spacing: 0.05em;
-  }
+  
 }

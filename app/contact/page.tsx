@@ -35,7 +35,7 @@ export default function ContactPage() {
   }
 
   return (
-    <main className="relative min-h-screen w-full bg-black p-6 md:p-10 page-text-24">
+    <main className="relative min-h-screen w-full bg-black p-6 md:p-10 ">
       <h1 className="absolute left-6 top-6 md:left-10 md:top-10 text-2xl md:text-3xl text-white">
         <Link href="/" className="hover:opacity-70 transition-opacity">
           Shelf-life an opera
@@ -49,23 +49,23 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
           <Card className="bg-zinc-300 border-zinc-800">
             <CardContent className="p-6">
-              <h3 className="font-semibold mb-4" style={{fontSize: '30px', color: 'yellow'}}>Contact Information</h3>
+              <h3 className="font-semibold mb-4" style={{fontSize: '30px', color: 'red'}}>Contact Information</h3>
               <div className="space-y-4 text-zinc-300">
                 <div>
-                  <p className="text-black font-medium" style={{fontSize: '30px'}}>Email</p>
-                  <a href="mailto:info@shelflifeopera.com" className="transition-colors hover:opacity-70 text-black" style={{fontSize: '30px'}}>
+                  <p className="text-black font-medium">Email</p>
+                  <a href="mailto:info@shelflifeopera.com" className="transition-colors hover:opacity-70 text-black">
                     info@shelflifeopera.com
                   </a>
                 </div>
                 <div>
-                  <p className="text-black font-medium" style={{fontSize: '30px'}}>Press Inquiries</p>
-                  <a href="mailto:press@shelflifeopera.com" className="transition-colors hover:opacity-70 text-black" style={{fontSize: '30px'}}>
+                  <p className="text-black font-medium">Press Inquiries</p>
+                  <a href="mailto:press@shelflifeopera.com" className="transition-colors hover:opacity-70 text-black">
                     press@shelflifeopera.com
                   </a>
                 </div>
                 <div>
-                  <p className="text-black font-medium" style={{fontSize: '30px'}}>Booking</p>
-                  <a href="mailto:booking@shelflifeopera.com" className="transition-colors hover:opacity-70 text-black" style={{fontSize: '30px'}}>
+                  <p className="text-black font-medium">Booking</p>
+                  <a href="mailto:booking@shelflifeopera.com" className="transition-colors hover:opacity-70 text-black">
                     booking@shelflifeopera.com
                   </a>
                 </div>
@@ -75,20 +75,20 @@ export default function ContactPage() {
           
           <Card className="bg-zinc-300 border-zinc-800">
             <CardContent className="p-6">
-              <h3 className="font-semibold mb-4" style={{fontSize: '30px', color: 'yellow'}}>Follow Us</h3>
+              <h3 className="font-semibold mb-4" style={{fontSize: '30px', color: 'red'}}>Follow Us</h3>
               <div className="space-y-3 text-zinc-300">
                 <p>
-                  <a href="#" className="transition-colors hover:opacity-70 text-black" style={{fontSize: '30px'}}>
+                  <a href="#" className="transition-colors hover:opacity-70 text-black">
                     @ Instagram
                   </a>
                 </p>
                 <p>
-                  <a href="#" className="transition-colors hover:opacity-70 text-black" style={{fontSize: '30px'}}>
+                  <a href="#" className="transition-colors hover:opacity-70 text-black">
                     f Facebook
                   </a>
                 </p>
                 <p>
-                  <a href="#" className="transition-colors hover:opacity-70 text-black" style={{fontSize: '30px'}}>
+                  <a href="#" className="transition-colors hover:opacity-70 text-black">
                     # Twitter
                   </a>
                 </p>
@@ -99,23 +99,22 @@ export default function ContactPage() {
         
         <Card className="bg-zinc-300 border-zinc-800">
           <CardContent className="p-6 md:p-8">
-            <h3 className="text-white font-semibold mb-6" style={{fontSize: '30px'}}>Send us a Message</h3>
+            <h3 className="text-white font-semibold mb-6" style={{fontSize: '30px', color: 'red'}}>Send us a Message</h3>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <Label htmlFor="name" className="text-black" style={{fontSize: '30px'}}>Name</Label>
+                  <Label htmlFor="name" className="text-black">Name</Label>
                   <Input
                     id="name"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="bg-zinc-300 border-zinc-700 text-black placeholder:text-zinc-500" style={{fontSize: '30px'}}
-                    placeholder="Your name"
+                    className="bg-zinc-300 border-zinc-700 text-black placeholder:text-zinc-500"                    placeholder="Your name"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-black" style={{fontSize: '30px'}}>Email</Label>
+                  <Label htmlFor="email" className="text-black">Email</Label>
                   <Input
                     id="email"
                     name="email"
@@ -123,25 +122,23 @@ export default function ContactPage() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="bg-zinc-300 border-zinc-700 text-black placeholder:text-zinc-500" style={{fontSize: '30px'}}
-                    placeholder="your@email.com"
+                    className="bg-zinc-300 border-zinc-700 text-black placeholder:text-zinc-500"                    placeholder="your@email.com"
                   />
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="subject" className="text-black" style={{fontSize: '30px'}}>Subject</Label>
+                <Label htmlFor="subject" className="text-black">Subject</Label>
                 <Input
                   id="subject"
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="bg-zinc-300 border-zinc-700 text-black placeholder:text-zinc-500" style={{fontSize: '30px'}}
-                  placeholder="What's this about?"
+                  className="bg-zinc-300 border-zinc-700 text-black placeholder:text-zinc-500"                  placeholder="What's this about?"
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="message" className="text-black" style={{fontSize: '30px'}}>Message</Label>
+                <Label htmlFor="message" className="text-black">Message</Label>
                 <Textarea
                   id="message"
                   name="message"
@@ -155,8 +152,7 @@ export default function ContactPage() {
               </div>
               <Button 
                 type="submit" 
-                className="bg-white text-black hover:bg-zinc-200 transition-colors px-8 py-2" style={{fontSize: '30px'}}
-              >
+                className="bg-white text-black hover:bg-zinc-200 transition-colors px-8 py-2"              >
                 Send Message
               </Button>
             </form>

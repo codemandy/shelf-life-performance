@@ -42,6 +42,7 @@ export default function HomePage() {
   const [count, setCount] = React.useState(0)
   const [lightboxOpen, setLightboxOpen] = React.useState(false)
   const [lightboxImage, setLightboxImage] = React.useState("")
+  const [lightboxIndex, setLightboxIndex] = React.useState(0)
 
   React.useEffect(() => {
     if (!api) return
@@ -53,6 +54,23 @@ export default function HomePage() {
       api.off("select", onSelect)
     }
   }, [api])
+
+  const openLightbox = (imageSrc: string, imageIndex: number) => {
+    setLightboxImage(imageSrc)
+    setLightboxIndex(imageIndex)
+    setLightboxOpen(true)
+  }
+
+  const navigateLightbox = (direction: 'prev' | 'next') => {
+    let newIndex
+    if (direction === 'prev') {
+      newIndex = lightboxIndex > 0 ? lightboxIndex - 1 : images.length - 1
+    } else {
+      newIndex = lightboxIndex < images.length - 1 ? lightboxIndex + 1 : 0
+    }
+    setLightboxIndex(newIndex)
+    setLightboxImage(images[newIndex])
+  }
 
   return (
     <main className="relative min-h-screen w-full bg-black p-6 md:p-10 flex items-center">
@@ -73,10 +91,7 @@ export default function HomePage() {
                 <div 
                   key={i}
                   className="relative w-full aspect-[4/3] overflow-hidden bg-muted cursor-pointer hover:opacity-90 transition-opacity"
-                  onClick={() => {
-                    setLightboxImage(src)
-                    setLightboxOpen(true)
-                  }}
+                  onClick={() => openLightbox(src, i)}
                 >
                   <img
                     src={src}
@@ -102,10 +117,7 @@ export default function HomePage() {
                     >
                       <div 
                         className="relative h-[322px] overflow-hidden bg-muted cursor-pointer hover:opacity-90 transition-opacity"
-                        onClick={() => {
-                          setLightboxImage(src)
-                          setLightboxOpen(true)
-                        }}
+                        onClick={() => openLightbox(src, i)}
                       >
                         <img
                           src={src}
@@ -118,17 +130,22 @@ export default function HomePage() {
                 </CarouselContent>
               </Carousel>
 
-              {/* Pagination dots */}
-              <div className="pointer-events-none absolute -bottom-10 right-3 flex gap-1.5">
-                {Array.from({ length: count }).map((_, i) => (
-                  <span
-                    key={i}
-                    className={`h-1.5 w-1.5 rounded-full ${
-                      i === current ? "bg-white" : "bg-white/30"
-                    }`}
-                  />
-                ))}
+              {/* Navigation arrows */}
+              <div className="absolute -bottom-10 right-3 flex items-center gap-2">
+                <button 
+                  onClick={() => api?.scrollPrev()}
+                  className="bg-transparent border-0 hover:bg-transparent text-white"
+                >
+                  ←
+                </button>
+                <button 
+                  onClick={() => api?.scrollNext()}
+                  className="bg-transparent border-0 hover:bg-transparent text-white"
+                >
+                  →
+                </button>
               </div>
+
             </div>
           </div>
         </CardContent>
@@ -137,15 +154,36 @@ export default function HomePage() {
       {/* Lightbox - Custom overlay */}
       {lightboxOpen && (
         <div 
-          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center cursor-pointer"
+          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-12"
           onClick={() => setLightboxOpen(false)}
         >
           <img
             src={lightboxImage}
             alt="Lightbox view"
-            className="max-w-[120%] max-h-[120%] object-contain scale-100"
-            style={{ maxWidth: '120vw', maxHeight: '120vh' }}
+            className="max-w-full max-h-full object-contain cursor-pointer"
+            style={{ maxWidth: 'calc(100vw - 6rem)', maxHeight: 'calc(100vh - 6rem)' }}
+            onClick={(e) => e.stopPropagation()}
           />
+          
+          {/* Navigation arrows */}
+          <button 
+            onClick={(e) => {
+              e.stopPropagation()
+              navigateLightbox('prev')
+            }}
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-transparent border-0 hover:bg-transparent text-white text-xl font-light hover:opacity-70 transition-opacity px-2"
+          >
+            ←
+          </button>
+          <button 
+            onClick={(e) => {
+              e.stopPropagation()
+              navigateLightbox('next')
+            }}
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-transparent border-0 hover:bg-transparent text-white text-xl font-light hover:opacity-70 transition-opacity px-2"
+          >
+            →
+          </button>
         </div>
       )}
     </main>
