@@ -162,7 +162,10 @@ export default function HomePage() {
             alt="Lightbox view"
             className="max-w-full max-h-full object-contain cursor-pointer"
             style={{ maxWidth: 'calc(100vw - 6rem)', maxHeight: 'calc(100vh - 6rem)' }}
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => {
+              e.stopPropagation()
+              navigateLightbox('next')
+            }}
           />
           
           {/* Navigation arrows */}
