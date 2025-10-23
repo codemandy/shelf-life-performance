@@ -79,22 +79,33 @@ export default function HomePage() {
   const [lightboxOpen, setLightboxOpen] = React.useState(false)
   const [lightboxImage, setLightboxImage] = React.useState("")
   const [lightboxIndex, setLightboxIndex] = React.useState(0)
+  const [isDragging, setIsDragging] = React.useState(false)
 
   React.useEffect(() => {
     if (!api) return
     setCount(api.scrollSnapList().length)
     const onSelect = () => setCurrent(api.selectedScrollSnap())
+    const onPointerDown = () => setIsDragging(false)
+    const onDrag = () => setIsDragging(true)
+    
     api.on("select", onSelect)
+    api.on("pointerDown", onPointerDown)
+    api.on("scroll", onDrag)
     onSelect()
+    
     return () => {
       api.off("select", onSelect)
+      api.off("pointerDown", onPointerDown)
+      api.off("scroll", onDrag)
     }
   }, [api])
 
   const openLightbox = (imageSrc: string, imageIndex: number) => {
-    setLightboxImage(imageSrc)
-    setLightboxIndex(imageIndex)
-    setLightboxOpen(true)
+    if (!isDragging) {
+      setLightboxImage(imageSrc)
+      setLightboxIndex(imageIndex)
+      setLightboxOpen(true)
+    }
   }
 
   const navigateLightbox = (direction: 'prev' | 'next') => {
@@ -149,28 +160,30 @@ export default function HomePage() {
                   align: "start", 
                   dragFree: true,
                   containScroll: "trimSnaps",
-                  skipSnaps: false
+                  skipSnaps: false,
+                  watchDrag: true
                 }}
                 className="w-full"
               >
-                <CarouselContent className="-ml-3" style={{ willChange: 'transform' }}>
+                <CarouselContent className="-ml-3" style={{ willChange: 'transform', touchAction: 'pan-y pinch-zoom' }}>
                   {images.map((src, i) => (
                     <CarouselItem
                       key={i}
                       className={`pl-3 ${itemWidths[i % itemWidths.length]}`}
                     >
                       <div 
-                        className="relative h-[322px] overflow-hidden bg-muted cursor-pointer hover:opacity-90 transition-opacity"
-                        style={{ transform: 'translateZ(0)' }}
+                        className="relative h-[322px] overflow-hidden bg-muted cursor-grab active:cursor-grabbing hover:opacity-90 transition-opacity"
+                        style={{ transform: 'translateZ(0)', userSelect: 'none' }}
                         onClick={() => openLightbox(src, i)}
                       >
                         <Image
                           src={src}
                           alt={`Slide ${i + 1}`}
                           fill
-                          className="object-cover"
+                          className="object-cover pointer-events-none"
                           sizes="(max-width: 768px) 100vw, 25vw"
                           priority={i < 4}
+                          draggable={false}
                         />
                       </div>
                     </CarouselItem>
