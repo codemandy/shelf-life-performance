@@ -47,7 +47,7 @@ export default function TourPage() {
         
         <div className="space-y-4">
           {tourDates.map((show, index) => (
-            <Card key={index} className="bg-zinc-300 border-zinc-800 hover:border-zinc-700 transition-colors">
+            <Card key={index} className="bg-zinc-300 border-zinc-800 hover:border-zinc-700 transition-colors relative">
               <CardContent className="p-6">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
                   <div className="md:col-span-1">
@@ -64,6 +64,10 @@ export default function TourPage() {
                   </div>
                 </div>
               </CardContent>
+              {/* Dark overlay with TBA text */}
+              <div className="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center rounded-lg">
+                <span className="text-white text-2xl md:text-3xl font-semibold">TBA</span>
+              </div>
             </Card>
           ))}
         </div>

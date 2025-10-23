@@ -47,33 +47,35 @@ export default function ContactPage() {
         <h2 className="text-4xl md:text-5xl text-white mb-8 md:mb-12">Get in Touch</h2>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          <Card className="bg-zinc-300 border-zinc-800">
-            <CardContent className="p-6">
-              <h3 className="font-semibold mb-4" style={{fontSize: '30px', color: 'red'}}>Contact Information</h3>
-              <div className="space-y-4 text-zinc-300">
+          <Card className="bg-zinc-300 border-zinc-800 relative">
+            <CardContent className="p-6 relative z-10">
+              <h3 className="font-semibold mb-4 text-white" style={{fontSize: '30px'}}>Contact Information</h3>
+              <div className="space-y-4">
                 <div>
-                  <p className="text-black font-medium">Email</p>
-                  <a href="mailto:info@shelflifeopera.com" className="transition-colors hover:opacity-70 text-black">
+                  <p className="text-white font-medium">Email</p>
+                  <a href="mailto:info@shelflifeopera.com" className="transition-colors hover:opacity-70 text-white">
                     info@shelflifeopera.com
                   </a>
                 </div>
                 <div>
-                  <p className="text-black font-medium">Press Inquiries</p>
-                  <a href="mailto:press@shelflifeopera.com" className="transition-colors hover:opacity-70 text-black">
+                  <p className="text-white font-medium">Press Inquiries</p>
+                  <a href="mailto:press@shelflifeopera.com" className="transition-colors hover:opacity-70 text-white">
                     press@shelflifeopera.com
                   </a>
                 </div>
                 <div>
-                  <p className="text-black font-medium">Booking</p>
-                  <a href="mailto:booking@shelflifeopera.com" className="transition-colors hover:opacity-70 text-black">
+                  <p className="text-white font-medium">Booking</p>
+                  <a href="mailto:booking@shelflifeopera.com" className="transition-colors hover:opacity-70 text-white">
                     booking@shelflifeopera.com
                   </a>
                 </div>
               </div>
             </CardContent>
+            {/* Dark overlay */}
+            <div className="absolute inset-0 bg-black bg-opacity-30 rounded-lg"></div>
           </Card>
           
-          <Card className="bg-zinc-300 border-zinc-800">
+          {/* <Card className="bg-zinc-300 border-zinc-800">
             <CardContent className="p-6">
               <h3 className="font-semibold mb-4" style={{fontSize: '30px', color: 'red'}}>Follow Us</h3>
               <div className="space-y-3 text-zinc-300">
@@ -94,16 +96,16 @@ export default function ContactPage() {
                 </p>
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
         </div>
         
-        <Card className="bg-zinc-300 border-zinc-800">
-          <CardContent className="p-6 md:p-8">
-            <h3 className="text-white font-semibold mb-6" style={{fontSize: '30px', color: 'red'}}>Send us a Message</h3>
+        <Card className="bg-zinc-300 border-zinc-800 relative">
+          <CardContent className="p-6 md:p-8 relative z-10">
+            <h3 className="text-white font-semibold mb-6" style={{fontSize: '30px'}}>Send us a Message</h3>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <Label htmlFor="name" className="text-black">Name</Label>
+                  <Label htmlFor="name" className="text-white">Name</Label>
                   <Input
                     id="name"
                     name="name"
@@ -114,7 +116,7 @@ export default function ContactPage() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-black">Email</Label>
+                  <Label htmlFor="email" className="text-white">Email</Label>
                   <Input
                     id="email"
                     name="email"
@@ -127,7 +129,7 @@ export default function ContactPage() {
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="subject" className="text-black">Subject</Label>
+                <Label htmlFor="subject" className="text-white">Subject</Label>
                 <Input
                   id="subject"
                   name="subject"
@@ -138,7 +140,7 @@ export default function ContactPage() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="message" className="text-black">Message</Label>
+                <Label htmlFor="message" className="text-white">Message</Label>
                 <Textarea
                   id="message"
                   name="message"
@@ -157,6 +159,8 @@ export default function ContactPage() {
               </Button>
             </form>
           </CardContent>
+          {/* Dark overlay */}
+          <div className="absolute inset-0 bg-black bg-opacity-30 rounded-lg"></div>
         </Card>
       </div>
     </main>

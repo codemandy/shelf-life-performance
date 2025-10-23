@@ -5,7 +5,7 @@ import Navigation from "@/components/navigation"
 
 export default function AboutPage() {
   return (
-    <main className="relative min-h-screen w-full bg-black p-6 md:p-10 flex items-center ">
+    <main className="relative min-h-screen w-full bg-black p-6 md:p-10 ">
       <h1 
         className="absolute left-6 top-6 md:left-10 md:top-10 text-2xl md:text-3xl text-white"
       >
@@ -15,7 +15,7 @@ export default function AboutPage() {
       </h1>
       <Navigation />
       
-      <div className="mx-auto max-w-4xl w-full text-white page-content">
+      <div className="container mx-auto max-w-4xl pt-24 md:pt-32 page-content text-white">
         <div className="space-y-8">
           <h2 className="text-4xl md:text-6xl font-light leading-tight">
             About Shelf-life
@@ -41,40 +41,40 @@ export default function AboutPage() {
             </h3>
             <div className="space-y-4">
               <div>
-                <p><strong>Concept:</strong> Matilda Tjäder, Penny Yiou Peng, Mathias Tang, Thibaut Knapp</p>
+                <p><strong className="text-white">Concept:</strong> Matilda Tjäder, Penny Yiou Peng, Mathias Tang, Thibaut Knapp</p>
               </div>
               <div>
-                <p><strong>Script:</strong> Matilda Tjäder, Penny Yiou Peng</p>
+                <p><strong className="text-white">Script:</strong> Matilda Tjäder, Penny Yiou Peng</p>
               </div>
               <div>
-                <p><strong>Composition:</strong> Matilda Tjäder</p>
+                <p><strong className="text-white">Composition:</strong> Matilda Tjäder</p>
               </div>
               <div>
-                <p><strong>Dramaturgy:</strong> Penny Yiou Peng</p>
+                <p><strong className="text-white">Dramaturgy:</strong> Penny Yiou Peng</p>
               </div>
               <div>
-                <p><strong>Scenography, light, video, installation, graphic design:</strong> Mathias Tang</p>
+                <p><strong className="text-white">Scenography, light, video, installation, graphic design:</strong> Mathias Tang</p>
               </div>
               <div>
-                <p><strong>Costume:</strong> Thibaut Knapp</p>
+                <p><strong className="text-white">Costume:</strong> Thibaut Knapp</p>
               </div>
               <div>
-                <p><strong>Musicians:</strong> Angelina Petrovic (flute), Rune Kielsgaard (drums), Niklas Tjäder (guitar)</p>
+                <p><strong className="text-white">Musicians:</strong> Angelina Petrovic (flute), Rune Kielsgaard (drums), Niklas Tjäder (guitar)</p>
               </div>
               <div>
-                <p><strong>Sound engineer:</strong> Daniel Tjäder</p>
+                <p><strong className="text-white">Sound engineer:</strong> Daniel Tjäder</p>
               </div>
               <div>
-                <p><strong>Producer:</strong> Scaling</p>
+                <p><strong className="text-white">Producer:</strong> Scaling</p>
               </div>
               <div>
-                <p><strong>Co-producer:</strong> Inkonst</p>
+                <p><strong className="text-white">Co-producer:</strong> Inkonst</p>
               </div>
               <div>
-                <p><strong>Residencies:</strong> MARC (Milvus Artistic Research Center), Inkonst, Country Town and Ane-Grete's Hus in Fox-Amphoux</p>
+                <p><strong className="text-white">Residencies:</strong> MARC (Milvus Artistic Research Center), Inkonst, Country Town and Ane-Grete's Hus in Fox-Amphoux</p>
               </div>
               <div>
-                <p><strong>Supported by:</strong> Region Skåne</p>
+                <p><strong className="text-white">Supported by:</strong> Region Skåne</p>
               </div>
             </div>
           </div>
