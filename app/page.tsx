@@ -85,8 +85,14 @@ export default function HomePage() {
     if (!api) return
     setCount(api.scrollSnapList().length)
     const onSelect = () => setCurrent(api.selectedScrollSnap())
-    const onPointerDown = () => setIsDragging(false)
-    const onDrag = () => setIsDragging(true)
+    const onPointerDown = () => {
+      console.log('Pointer down detected')
+      setIsDragging(false)
+    }
+    const onDrag = () => {
+      console.log('Drag detected')
+      setIsDragging(true)
+    }
     
     api.on("select", onSelect)
     api.on("pointerDown", onPointerDown)
@@ -161,11 +167,13 @@ export default function HomePage() {
                   dragFree: true,
                   containScroll: "trimSnaps",
                   skipSnaps: false,
-                  watchDrag: true
+                  watchDrag: true,
+                  watchResize: true,
+                  watchSlides: true
                 }}
                 className="w-full"
               >
-                <CarouselContent className="-ml-3" style={{ willChange: 'transform', touchAction: 'pan-y pinch-zoom' }}>
+                <CarouselContent className="-ml-3" style={{ willChange: 'transform' }}>
                   {images.map((src, i) => (
                     <CarouselItem
                       key={i}
@@ -180,7 +188,7 @@ export default function HomePage() {
                           src={src}
                           alt={`Slide ${i + 1}`}
                           fill
-                          className="object-cover pointer-events-none"
+                          className="object-cover"
                           sizes="(max-width: 768px) 100vw, 25vw"
                           priority={i < 4}
                           draggable={false}

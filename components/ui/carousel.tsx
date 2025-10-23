@@ -140,6 +140,7 @@ function CarouselContent({ className, ...props }: React.ComponentProps<'div'>) {
       ref={carouselRef}
       className="overflow-hidden"
       data-slot="carousel-content"
+      style={{ touchAction: 'pan-y pinch-zoom' }}
     >
       <div
         className={cn(
