@@ -35,7 +35,7 @@ export default function TourPage() {
 
   return (
     <main className="relative min-h-screen w-full bg-black p-6 md:p-10 page-text-24">
-      <h1 className="absolute left-6 top-6 md:left-10 md:top-10 text-2xl md:text-3xl text-white">
+      <h1 className="absolute left-5 top-3 text-[30px] leading-[36px] text-white">
         <Link href="/" className="hover:opacity-70 transition-opacity">
           Shelf-life an opera
         </Link>

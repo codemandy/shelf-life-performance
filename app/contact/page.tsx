@@ -36,7 +36,7 @@ export default function ContactPage() {
 
   return (
     <main className="relative min-h-screen w-full bg-black p-6 md:p-10 ">
-      <h1 className="absolute left-6 top-6 md:left-10 md:top-10 text-2xl md:text-3xl text-white">
+      <h1 className="absolute left-5 top-3 text-[30px] leading-[36px] text-white">
         <Link href="/" className="hover:opacity-70 transition-opacity">
           Shelf-life an opera
         </Link>
@@ -52,22 +52,15 @@ export default function ContactPage() {
               <h3 className="font-semibold mb-4 text-white" style={{fontSize: '30px'}}>Contact Information</h3>
               <div className="space-y-4">
                 <div>
-                  <p className="text-white font-medium">Email</p>
-                  <a href="mailto:info@shelflifeopera.com" className="transition-colors hover:opacity-70 text-white">
-                    info@shelflifeopera.com
-                  </a>
-                </div>
-                <div>
-                  <p className="text-white font-medium">Press Inquiries</p>
-                  <a href="mailto:press@shelflifeopera.com" className="transition-colors hover:opacity-70 text-white">
-                    press@shelflifeopera.com
-                  </a>
-                </div>
-                <div>
-                  <p className="text-white font-medium">Booking</p>
-                  <a href="mailto:booking@shelflifeopera.com" className="transition-colors hover:opacity-70 text-white">
-                    booking@shelflifeopera.com
-                  </a>
+                  <p className="text-white font-medium">Press / Bookings</p>
+                  <div className="space-y-1">
+                    <a href="mailto:jared@aliceagency.co" className="transition-colors hover:opacity-70 text-white block">
+                      jared@aliceagency.co
+                    </a>
+                    <a href="mailto:sara@aliceagency.co" className="transition-colors hover:opacity-70 text-white block">
+                      sara@aliceagency.co
+                    </a>
+                  </div>
                 </div>
               </div>
             </CardContent>

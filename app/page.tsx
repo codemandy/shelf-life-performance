@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
+import Image from "next/image"
 import {
   type CarouselApi,
   Carousel,
@@ -14,16 +15,40 @@ import { Card, CardContent } from "@/components/ui/card"
 import Navigation from "@/components/navigation"
 
 export default function HomePage() {
-  const images = [
-    "/shelf-media/2.jpg",
-    "/shelf-media/3.jpg",
-    "/shelf-media/4.jpg",
-    "/shelf-media/5.jpg",
-    "/shelf-media/6.jpg",
-    "/shelf-media/7.jpg",
-    "/shelf-media/9.jpg",
-    "/shelf-media/10.jpg",
+  // Shuffle function to randomize image order
+  const shuffleArray = (array: string[]) => {
+    const shuffled = [...array]
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+    }
+    return shuffled
+  }
+
+  const allImages = [
+    "/shelf-media/01.webp",
+    "/shelf-media/2.webp",
+    "/shelf-media/3.webp",
+    "/shelf-media/4.webp",
+    "/shelf-media/5.webp",
+    "/shelf-media/6.webp",
+    "/shelf-media/7.webp",
+    "/shelf-media/9.webp",
+    "/shelf-media/10.webp",
+    "/shelf-media/11.webp",
+    "/shelf-media/12.webp",
+    "/shelf-media/13.webp",
+    "/shelf-media/14.webp",
+    "/shelf-media/15.webp",
+    "/shelf-media/16.webp",
+    "/shelf-media/17.webp",
+    "/shelf-media/18.webp",
+    "/shelf-media/20.webp",
+    "/shelf-media/21.webp",
   ]
+
+  // Randomize the image order
+  const images = React.useMemo(() => shuffleArray(allImages), [])
 
   // Fixed basis classes to create variable width items
   const itemWidths = [
@@ -35,6 +60,17 @@ export default function HomePage() {
     "basis-[440px]",
     "basis-[300px]",
     "basis-[580px]",
+    "basis-[320px]",
+    "basis-[480px]",
+    "basis-[200px]",
+    "basis-[600px]",
+    "basis-[380px]",
+    "basis-[420px]",
+    "basis-[260px]",
+    "basis-[540px]",
+    "basis-[340px]",
+    "basis-[460px]",
+    "basis-[400px]",
   ]
 
   const [api, setApi] = React.useState<CarouselApi | null>(null)
@@ -75,7 +111,7 @@ export default function HomePage() {
   return (
     <main className="relative min-h-screen w-full bg-black p-6 md:p-10 flex items-center">
       <h1 
-        className="absolute left-6 top-6 md:left-10 md:top-10 text-2xl md:text-3xl text-white"
+        className="absolute left-5 top-3 text-[30px] leading-[36px] text-white"
       >
         <Link href="/" className="hover:opacity-70 transition-opacity">
           Shelf-life an opera
@@ -93,10 +129,13 @@ export default function HomePage() {
                   className="relative w-full aspect-[4/3] overflow-hidden bg-muted cursor-pointer hover:opacity-90 transition-opacity"
                   onClick={() => openLightbox(src, i)}
                 >
-                  <img
+                  <Image
                     src={src}
                     alt={`Image ${i + 1}`}
-                    className="h-full w-full object-cover"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority={i < 3}
                   />
                 </div>
               ))}
@@ -106,10 +145,15 @@ export default function HomePage() {
             <div className="hidden md:block">
               <Carousel
                 setApi={setApi}
-                opts={{ align: "start", dragFree: true }}
+                opts={{ 
+                  align: "start", 
+                  dragFree: true,
+                  containScroll: "trimSnaps",
+                  skipSnaps: false
+                }}
                 className="w-full"
               >
-                <CarouselContent className="-ml-3">
+                <CarouselContent className="-ml-3" style={{ willChange: 'transform' }}>
                   {images.map((src, i) => (
                     <CarouselItem
                       key={i}
@@ -117,12 +161,16 @@ export default function HomePage() {
                     >
                       <div 
                         className="relative h-[322px] overflow-hidden bg-muted cursor-pointer hover:opacity-90 transition-opacity"
+                        style={{ transform: 'translateZ(0)' }}
                         onClick={() => openLightbox(src, i)}
                       >
-                        <img
+                        <Image
                           src={src}
                           alt={`Slide ${i + 1}`}
-                          className="h-full w-full object-cover"
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, 25vw"
+                          priority={i < 4}
                         />
                       </div>
                     </CarouselItem>
@@ -157,15 +205,18 @@ export default function HomePage() {
           className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-12"
           onClick={() => setLightboxOpen(false)}
         >
-          <img
+          <Image
             src={lightboxImage}
             alt="Lightbox view"
+            width={1200}
+            height={800}
             className="max-w-full max-h-full object-contain cursor-pointer"
             style={{ maxWidth: 'calc(100vw - 6rem)', maxHeight: 'calc(100vh - 6rem)' }}
             onClick={(e) => {
               e.stopPropagation()
               navigateLightbox('next')
             }}
+            priority
           />
           
           {/* Navigation arrows */}
