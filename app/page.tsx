@@ -178,20 +178,21 @@ export default function HomePage() {
                 </CarouselContent>
               </Carousel>
 
-              {/* Navigation arrows */}
-              <div className="absolute -bottom-10 right-3 flex items-center gap-2">
-                <button 
-                  onClick={() => api?.scrollPrev()}
-                  className="bg-transparent border-0 hover:bg-transparent text-white"
-                >
-                  ←
-                </button>
-                <button 
-                  onClick={() => api?.scrollNext()}
-                  className="bg-transparent border-0 hover:bg-transparent text-white"
-                >
-                  →
-                </button>
+              {/* Dot navigation */}
+              <div className="absolute -bottom-10 left-0 right-0 flex justify-between items-center px-3">
+                {Array.from({ length: count }).map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => api?.scrollTo(index)}
+                    className="p-2 cursor-pointer group"
+                  >
+                    <div className={`w-1.5 h-1.5 rounded-full transition-all duration-300 group-active:scale-125 ${
+                      index === current 
+                        ? 'bg-white opacity-40' 
+                        : 'bg-white opacity-15 group-hover:opacity-30'
+                    }`} />
+                  </button>
+                ))}
               </div>
 
             </div>
@@ -219,25 +220,26 @@ export default function HomePage() {
             priority
           />
           
-          {/* Navigation arrows */}
-          <button 
-            onClick={(e) => {
-              e.stopPropagation()
-              navigateLightbox('prev')
-            }}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-transparent border-0 hover:bg-transparent text-white text-xl font-light hover:opacity-70 transition-opacity px-2"
-          >
-            ←
-          </button>
-          <button 
-            onClick={(e) => {
-              e.stopPropagation()
-              navigateLightbox('next')
-            }}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-transparent border-0 hover:bg-transparent text-white text-xl font-light hover:opacity-70 transition-opacity px-2"
-          >
-            →
-          </button>
+          {/* Dot navigation for lightbox */}
+          <div className="absolute bottom-8 left-0 right-0 flex justify-between items-center px-12">
+            {images.map((_, index) => (
+              <button
+                key={index}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setLightboxIndex(index)
+                  setLightboxImage(images[index])
+                }}
+                className="p-2 cursor-pointer group"
+              >
+                <div className={`w-1.5 h-1.5 rounded-full transition-all duration-300 group-active:scale-125 ${
+                  index === lightboxIndex 
+                    ? 'bg-white opacity-40' 
+                    : 'bg-white opacity-15 group-hover:opacity-30'
+                }`} />
+              </button>
+            ))}
+          </div>
         </div>
       )}
     </main>
