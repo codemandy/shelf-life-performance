@@ -3,7 +3,6 @@
 import * as React from "react"
 import Link from "next/link"
 import Navigation from "@/components/navigation"
-import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -35,8 +34,8 @@ export default function ContactPage() {
   }
 
   return (
-    <main className="relative min-h-screen w-full bg-black p-6 md:p-10 ">
-      <h1 className="absolute left-5 top-3 text-[30px] leading-[36px] text-white">
+    <main className="relative min-h-screen w-full bg-white p-6 md:p-10 ">
+      <h1 className="absolute left-5 top-3 text-black">
         <Link href="/" className="hover:opacity-70 transition-opacity">
           Shelf-life an opera
         </Link>
@@ -44,72 +43,38 @@ export default function ContactPage() {
       <Navigation />
       
       <div className="container mx-auto max-w-4xl pt-24 md:pt-32 page-content">
-        <h2 className="text-4xl md:text-5xl text-white mb-8 md:mb-12">Get in Touch</h2>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          <Card className="bg-zinc-300 border-zinc-800 relative">
-            <CardContent className="p-6 relative z-10">
-              <h3 className="font-semibold mb-4 text-white" style={{fontSize: '30px'}}>Contact Information</h3>
-              <div className="space-y-4">
-                <div>
-                  <p className="text-white font-medium">Press / Bookings</p>
-                  <div className="space-y-1">
-                    <a href="mailto:jared@aliceagency.co" className="transition-colors hover:opacity-70 text-white block">
-                      jared@aliceagency.co
-                    </a>
-                    <a href="mailto:sara@aliceagency.co" className="transition-colors hover:opacity-70 text-white block">
-                      sara@aliceagency.co
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-            {/* Dark overlay */}
-            <div className="absolute inset-0 bg-black bg-opacity-30 rounded-lg"></div>
-          </Card>
-          
-          {/* <Card className="bg-zinc-300 border-zinc-800">
-            <CardContent className="p-6">
-              <h3 className="font-semibold mb-4" style={{fontSize: '30px', color: 'red'}}>Follow Us</h3>
-              <div className="space-y-3 text-zinc-300">
-                <p>
-                  <a href="#" className="transition-colors hover:opacity-70 text-black">
-                    @ Instagram
-                  </a>
-                </p>
-                <p>
-                  <a href="#" className="transition-colors hover:opacity-70 text-black">
-                    f Facebook
-                  </a>
-                </p>
-                <p>
-                  <a href="#" className="transition-colors hover:opacity-70 text-black">
-                    # Twitter
-                  </a>
-                </p>
-              </div>
-            </CardContent>
-          </Card> */}
+        <div className="mb-12 space-y-4">
+          <h3 className="text-black mb-4">Contact</h3>
+          <div>
+            <p className="text-black">Press / Bookings</p>
+            <div className="space-y-1">
+              <a href="mailto:jared@aliceagency.co" className="transition-colors hover:opacity-70 text-black block">
+                jared@aliceagency.co
+              </a>
+              <a href="mailto:sara@aliceagency.co" className="transition-colors hover:opacity-70 text-black block">
+                sara@aliceagency.co
+              </a>
+            </div>
+          </div>
         </div>
-        
-        <Card className="bg-zinc-300 border-zinc-800 relative">
-          <CardContent className="p-6 md:p-8 relative z-10">
-            <h3 className="text-white font-semibold mb-6" style={{fontSize: '30px'}}>Send us a Message</h3>
-            <form onSubmit={handleSubmit} className="space-y-6">
+
+        <div>
+          <h3 className="text-black mb-6">Message</h3>
+          <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <Label htmlFor="name" className="text-white">Name</Label>
+                  <Label htmlFor="name" className="text-black">Name</Label>
                   <Input
                     id="name"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="bg-zinc-300 border-zinc-700 text-black placeholder:text-zinc-500"                    placeholder="Your name"
+                    className="bg-white border border-black text-black placeholder:text-zinc-500"                    placeholder="Your name"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-white">Email</Label>
+                  <Label htmlFor="email" className="text-black">Email</Label>
                   <Input
                     id="email"
                     name="email"
@@ -117,23 +82,23 @@ export default function ContactPage() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="bg-zinc-300 border-zinc-700 text-black placeholder:text-zinc-500"                    placeholder="your@email.com"
+                    className="bg-white border border-black text-black placeholder:text-zinc-500"                    placeholder="your@email.com"
                   />
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="subject" className="text-white">Subject</Label>
+                <Label htmlFor="subject" className="text-black">Subject</Label>
                 <Input
                   id="subject"
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="bg-zinc-300 border-zinc-700 text-black placeholder:text-zinc-500"                  placeholder="What's this about?"
+                  className="bg-white border border-black text-black placeholder:text-zinc-500"                  placeholder="What's this about?"
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="message" className="text-white">Message</Label>
+                <Label htmlFor="message" className="text-black">Message</Label>
                 <Textarea
                   id="message"
                   name="message"
@@ -141,20 +106,17 @@ export default function ContactPage() {
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="bg-zinc-300 border-zinc-700 text-white placeholder:text-zinc-500 resize-none"
+                  className="bg-white border border-black text-black placeholder:text-zinc-500 resize-none"
                   placeholder="Tell us more..."
                 />
               </div>
-              <Button 
-                type="submit" 
-                className="bg-white text-black hover:bg-zinc-200 transition-colors px-8 py-2"              >
+              <Button
+                type="submit"
+                className="bg-gray-200 text-black hover:bg-gray-300 transition-colors px-8 py-2"              >
                 Send Message
               </Button>
-            </form>
-          </CardContent>
-          {/* Dark overlay */}
-          <div className="absolute inset-0 bg-black bg-opacity-30 rounded-lg"></div>
-        </Card>
+          </form>
+        </div>
       </div>
     </main>
   )

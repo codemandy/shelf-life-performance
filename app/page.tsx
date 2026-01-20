@@ -15,17 +15,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import Navigation from "@/components/navigation"
 
 export default function HomePage() {
-  // Shuffle function to randomize image order
-  const shuffleArray = (array: string[]) => {
-    const shuffled = [...array]
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
-    }
-    return shuffled
-  }
-
-  const allImages = [
+  const images = [
     "/shelf-media/01.webp",
     "/shelf-media/2.webp",
     "/shelf-media/3.webp",
@@ -47,31 +37,8 @@ export default function HomePage() {
     "/shelf-media/21.webp",
   ]
 
-  // Randomize the image order
-  const images = React.useMemo(() => shuffleArray(allImages), [])
-
-  // Fixed basis classes to create variable width items
-  const itemWidths = [
-    "basis-[280px]",
-    "basis-[640px]",
-    "basis-[140px]",
-    "basis-[520px]",
-    "basis-[360px]",
-    "basis-[440px]",
-    "basis-[300px]",
-    "basis-[580px]",
-    "basis-[320px]",
-    "basis-[480px]",
-    "basis-[200px]",
-    "basis-[600px]",
-    "basis-[380px]",
-    "basis-[420px]",
-    "basis-[260px]",
-    "basis-[540px]",
-    "basis-[340px]",
-    "basis-[460px]",
-    "basis-[400px]",
-  ]
+  // Fixed width for all carousel items
+  const itemWidth = "basis-[600px]"
 
   const [api, setApi] = React.useState<CarouselApi | null>(null)
   const [current, setCurrent] = React.useState(0)
@@ -93,12 +60,12 @@ export default function HomePage() {
       console.log('Drag detected')
       setIsDragging(true)
     }
-    
+
     api.on("select", onSelect)
     api.on("pointerDown", onPointerDown)
     api.on("scroll", onDrag)
     onSelect()
-    
+
     return () => {
       api.off("select", onSelect)
       api.off("pointerDown", onPointerDown)
@@ -126,24 +93,24 @@ export default function HomePage() {
   }
 
   return (
-    <main className="relative min-h-screen w-full bg-black p-6 md:p-10 flex items-center">
-      <h1 
-        className="absolute left-5 top-3 text-[30px] leading-[36px] text-white"
+    <main className="relative min-h-screen w-full bg-white p-6 md:p-10 flex items-center">
+      <h1
+        className="absolute left-5 top-3 text-black"
       >
         <Link href="/" className="hover:opacity-70 transition-opacity">
           Shelf-life an opera
         </Link>
       </h1>
       <Navigation />
-      <Card className="mx-auto max-w-[1100px] w-full bg-black border-0 overflow-visible">
+      <Card className="mx-auto max-w-[1100px] w-full bg-white border-0 overflow-visible rounded-none">
         <CardContent className="pb-12 overflow-visible">
           <div className="relative">
             {/* Mobile: Vertical image flow */}
             <div className="md:hidden flex flex-col gap-4">
               {images.map((src, i) => (
-                <div 
+                <div
                   key={i}
-                  className="relative w-full aspect-[4/3] overflow-hidden bg-muted cursor-pointer hover:opacity-90 transition-opacity"
+                  className="relative w-full aspect-[4/3] overflow-hidden bg-muted cursor-pointer hover:opacity-90 transition-opacity rounded-none"
                   onClick={() => openLightbox(src, i)}
                 >
                   <Image
@@ -162,8 +129,8 @@ export default function HomePage() {
             <div className="hidden md:block">
               <Carousel
                 setApi={setApi}
-                opts={{ 
-                  align: "start", 
+                opts={{
+                  align: "start",
                   dragFree: true,
                   containScroll: "trimSnaps",
                   skipSnaps: false,
@@ -177,10 +144,10 @@ export default function HomePage() {
                   {images.map((src, i) => (
                     <CarouselItem
                       key={i}
-                      className={`pl-3 ${itemWidths[i % itemWidths.length]}`}
+                      className={`pl-3 ${itemWidth}`}
                     >
-                      <div 
-                        className="relative h-[322px] overflow-hidden bg-muted cursor-grab active:cursor-grabbing hover:opacity-90 transition-opacity"
+                      <div
+                        className="relative h-[322px] overflow-hidden bg-muted cursor-grab active:cursor-grabbing hover:opacity-90 transition-opacity rounded-none"
                         style={{ transform: 'translateZ(0)', userSelect: 'none' }}
                         onClick={() => openLightbox(src, i)}
                       >
@@ -198,24 +165,6 @@ export default function HomePage() {
                   ))}
                 </CarouselContent>
               </Carousel>
-
-              {/* Dot navigation */}
-              <div className="absolute -bottom-10 left-0 right-0 flex justify-between items-center px-3">
-                {Array.from({ length: count }).map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => api?.scrollTo(index)}
-                    className="p-2 cursor-pointer group"
-                  >
-                    <div className={`w-1.5 h-1.5 rounded-full transition-all duration-300 group-active:scale-125 ${
-                      index === current 
-                        ? 'bg-white opacity-40' 
-                        : 'bg-white opacity-15 group-hover:opacity-30'
-                    }`} />
-                  </button>
-                ))}
-              </div>
-
             </div>
           </div>
         </CardContent>
@@ -223,10 +172,22 @@ export default function HomePage() {
 
       {/* Lightbox - Custom overlay */}
       {lightboxOpen && (
-        <div 
+        <div
           className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-12"
           onClick={() => setLightboxOpen(false)}
         >
+          {/* Previous arrow */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              navigateLightbox('prev')
+            }}
+            className="absolute left-8 text-white text-2xl hover:opacity-70 transition-opacity"
+            aria-label="Previous image"
+          >
+            ←
+          </button>
+
           <Image
             src={lightboxImage}
             alt="Lightbox view"
@@ -240,27 +201,18 @@ export default function HomePage() {
             }}
             priority
           />
-          
-          {/* Dot navigation for lightbox */}
-          <div className="absolute bottom-8 left-0 right-0 flex justify-between items-center px-12">
-            {images.map((_, index) => (
-              <button
-                key={index}
-                onClick={(e) => {
-                  e.stopPropagation()
-                  setLightboxIndex(index)
-                  setLightboxImage(images[index])
-                }}
-                className="p-2 cursor-pointer group"
-              >
-                <div className={`w-1.5 h-1.5 rounded-full transition-all duration-300 group-active:scale-125 ${
-                  index === lightboxIndex 
-                    ? 'bg-white opacity-40' 
-                    : 'bg-white opacity-15 group-hover:opacity-30'
-                }`} />
-              </button>
-            ))}
-          </div>
+
+          {/* Next arrow */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              navigateLightbox('next')
+            }}
+            className="absolute right-8 text-white text-2xl hover:opacity-70 transition-opacity"
+            aria-label="Next image"
+          >
+            →
+          </button>
         </div>
       )}
     </main>

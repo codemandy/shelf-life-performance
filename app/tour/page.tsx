@@ -34,8 +34,8 @@ export default function TourPage() {
   ]
 
   return (
-    <main className="relative min-h-screen w-full bg-black p-6 md:p-10 page-text-24">
-      <h1 className="absolute left-5 top-3 text-[30px] leading-[36px] text-white">
+    <main className="relative min-h-screen w-full bg-white p-6 md:p-10 page-text-24">
+      <h1 className="absolute left-5 top-3 text-black">
         <Link href="/" className="hover:opacity-70 transition-opacity">
           Shelf-life an opera
         </Link>
@@ -43,39 +43,33 @@ export default function TourPage() {
       <Navigation />
       
       <div className="container mx-auto max-w-4xl pt-24 md:pt-32 page-content">
-        <h2 className="text-4xl md:text-5xl text-white mb-8 md:mb-12">Tour Dates</h2>
+        <h2 className="text-black mb-8 md:mb-12">Tour Dates</h2>
         
         <div className="space-y-4">
           {tourDates.map((show, index) => (
-            <Card key={index} className="bg-zinc-300 border-zinc-800 hover:border-zinc-700 transition-colors relative">
+            <Card key={index} className="bg-white border-0 relative">
               <CardContent className="p-6">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
                   <div className="md:col-span-1">
-                    <p className="font-semibold" style={{fontSize: '30px', color: 'red'}}>{show.date}</p>
+                    <p className="font-semibold" style={{color: 'red'}}>{show.date}</p>
                   </div>
                   <div className="md:col-span-2">
-                    <p className="text-black" style={{fontSize: '30px'}}>{show.venue}</p>
-                    <p className="text-black" style={{fontSize: '30px'}}>{show.city}</p>
+                    <p className="text-black">{show.venue}</p>
+                    <p className="text-black">{show.city}</p>
                   </div>
                   <div className="md:col-span-1 flex items-center justify-start md:justify-end">
-                    <span className="inline-flex items-center px-3 py-1 text-sm font-medium text-white bg-zinc-300 rounded-full">
+                    <span className="inline-flex items-center px-3 py-1 text-sm font-medium text-black bg-zinc-300 rounded-full">
                       {show.status}
                     </span>
                   </div>
                 </div>
               </CardContent>
-              {/* Dark overlay with TBA text */}
-              <div className="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center rounded-lg">
-                <span className="text-white text-2xl md:text-3xl font-semibold">TBA</span>
+              {/* TBA overlay */}
+              <div className="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center">
+                <span className="text-black font-semibold">TBA</span>
               </div>
             </Card>
           ))}
-        </div>
-        
-        <div className="mt-12 text-center">
-          <p className="text-zinc-400 text-lg">
-            More dates to be announced. Check back soon!
-          </p>
         </div>
       </div>
     </main>

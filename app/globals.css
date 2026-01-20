@@ -1,13 +1,6 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
-@font-face {
-  font-family: 'Dummy';
-  src: url('/dummy.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -82,8 +75,8 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-inter);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -127,20 +120,21 @@
     @apply border-border outline-ring/50;
   }
   
-  /* Apply Geist font to all text elements except headings and nav links */
+  /* Apply Inter font to all text elements except headings and nav links */
   body, p, div, span, button, input, textarea, select, label, li, td, th {
-    font-family: var(--font-geist-sans), sans-serif;
-    font-size: 1.125rem; /* 18px */
+    font-family: var(--font-inter), sans-serif;
+    font-size: 1rem; /* 16px */
   }
   
-  /* Keep Dummy font for headings and navigation links */
+  /* Use Bebas Neue font for headings and navigation links */
   h1, h2, h3, h4, h5, h6, nav a {
-    font-family: 'Dummy', sans-serif;
+    font-family: var(--font-bebas-neue), sans-serif;
+    font-size: 1.125rem; /* 18px */
   }
   
   body {
     @apply bg-background text-foreground;
-    font-size: 1.125rem; /* 18px */
+    font-size: 1rem; /* 16px */
     letter-spacing: normal;
   }
   
@@ -149,15 +143,20 @@
   }
   
   p {
-    color: blue;
+    color: black;
   }
   
   a {
-    color: yellow;
+    color: black;
   }
-  
-  nav a, h1 a {
-    color: white;
+
+  nav a {
+    /* Color handled by Navigation component based on pathname */
+  }
+
+  h1 a {
+    /* Inherit color from h1 parent - black on frontpage, white on other pages */
+    color: inherit;
   }
   
   html, body {
