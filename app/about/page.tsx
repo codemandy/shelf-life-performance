@@ -23,7 +23,7 @@ export default function AboutPage() {
 
           <div className="space-y-6 leading-relaxed text-black">
             <p className="text-black">
-              Shelf Life: An Opera is an experimental opera that explores the absurd and often invisible infrastructures surrounding our lives. Through repetition, obsession, and satire, everyday protocols are transformed into a dreamlike landscape where memory, pattern recognition, and surveillance take center stage.
+              Shelf Life: An Opera (2025) is an experimental opera that explores the absurd and often invisible infrastructures surrounding our lives. Through repetition, obsession, and satire, everyday protocols are transformed into a dreamlike landscape where memory, pattern recognition, and surveillance take center stage.
             </p>
             
             <p className="text-black">
@@ -44,19 +44,19 @@ export default function AboutPage() {
                 <p><span className="text-black">Concept:</span> <a href="https://matildatjader.com/" target="_blank" rel="noopener noreferrer" className="text-black underline hover:opacity-70 transition-opacity">Matilda Tjäder</a><span className="text-black">, </span><a href="https://www.yioupennypeng.com/" target="_blank" rel="noopener noreferrer" className="text-black underline hover:opacity-70 transition-opacity">Penny Yiou Peng</a><span className="text-black">, </span><a href="https://www.mathiastang.com/" target="_blank" rel="noopener noreferrer" className="text-black underline hover:opacity-70 transition-opacity">Mathias Tang</a><span className="text-black">, </span><a href="https://www.instagram.com/thibautknapp/?hl=en" target="_blank" rel="noopener noreferrer" className="text-black underline hover:opacity-70 transition-opacity">Thibaut Knapp</a></p>
               </div>
               <div>
-                <p><span className="text-black">Script:</span> <a href="https://matildatjader.com/" target="_blank" rel="noopener noreferrer" className="text-black underline hover:opacity-70 transition-opacity">Matilda Tjäder</a><span className="text-black">, </span><a href="https://www.yioupennypeng.com/" target="_blank" rel="noopener noreferrer" className="text-black underline hover:opacity-70 transition-opacity">Penny Yiou Peng</a></p>
+                <p><span className="text-black">Script:</span> <span className="text-black">Matilda Tjäder, Penny Yiou Peng</span></p>
               </div>
               <div>
-                <p><span className="text-black">Composition:</span> <a href="https://matildatjader.com/" target="_blank" rel="noopener noreferrer" className="text-black underline hover:opacity-70 transition-opacity">Matilda Tjäder</a></p>
+                <p><span className="text-black">Composition:</span> <span className="text-black">Matilda Tjäder</span></p>
               </div>
               <div>
-                <p><span className="text-black">Dramaturgy:</span> <a href="https://www.yioupennypeng.com/" target="_blank" rel="noopener noreferrer" className="text-black underline hover:opacity-70 transition-opacity">Penny Yiou Peng</a></p>
+                <p><span className="text-black">Dramaturgy:</span> <span className="text-black">Penny Yiou Peng</span></p>
               </div>
               <div>
-                <p><span className="text-black">Scenography, light, video, installation, graphic design:</span> <a href="https://www.mathiastang.com/" target="_blank" rel="noopener noreferrer" className="text-black underline hover:opacity-70 transition-opacity">Mathias Tang</a></p>
+                <p><span className="text-black">Scenography, light, video, installation, graphic design:</span> <span className="text-black">Mathias Tang</span></p>
               </div>
               <div>
-                <p><span className="text-black">Costume:</span> <a href="https://www.instagram.com/thibautknapp/?hl=en" target="_blank" rel="noopener noreferrer" className="text-black underline hover:opacity-70 transition-opacity">Thibaut Knapp</a></p>
+                <p><span className="text-black">Costume:</span> <span className="text-black">Thibaut Knapp</span></p>
               </div>
               <div>
                 <p><span className="text-black">Musicians:</span> <span className="text-black">Angelina Petrovic (flute)</span><span className="text-black">, </span><a href="https://www.instagram.com/runekielsgaard/" target="_blank" rel="noopener noreferrer" className="text-black underline hover:opacity-70 transition-opacity">Rune Kielsgaard</a> <span className="text-black">(drums)</span><span className="text-black">, </span><a href="https://www.instagram.com/niklas_tjader/" target="_blank" rel="noopener noreferrer" className="text-black underline hover:opacity-70 transition-opacity">Niklas Tjäder</a> <span className="text-black">(guitar)</span></p>
@@ -71,7 +71,7 @@ export default function AboutPage() {
                 <p><span className="text-black">Co-producer:</span> <a href="https://inkonst.com/en/" target="_blank" rel="noopener noreferrer" className="text-black underline hover:opacity-70 transition-opacity">Inkonst</a></p>
               </div>
               <div>
-                <p><span className="text-black">Residencies:</span> <a href="https://www.milvusart.se/about" target="_blank" rel="noopener noreferrer" className="text-black underline hover:opacity-70 transition-opacity">MARC (Milvus Artistic Research Center)</a><span className="text-black">, </span><a href="https://inkonst.com/en/" target="_blank" rel="noopener noreferrer" className="text-black underline hover:opacity-70 transition-opacity">Inkonst</a><span className="text-black">, </span><a href="https://www.instagram.com/countrytownvestjylland/" target="_blank" rel="noopener noreferrer" className="text-black underline hover:opacity-70 transition-opacity">Country Town</a><span className="text-black"> and </span><a href="https://bkf.dk/soeg-stoette/arbejdsophold/huset-i-provence/" target="_blank" rel="noopener noreferrer" className="text-black underline hover:opacity-70 transition-opacity">Ane-Grete's Hus in Fox-Amphoux</a></p>
+                <p><span className="text-black">Residencies:</span> <a href="https://www.milvusart.se/about" target="_blank" rel="noopener noreferrer" className="text-black underline hover:opacity-70 transition-opacity">MARC (Milvus Artistic Research Center)</a><span className="text-black">, Inkonst, </span><a href="https://www.instagram.com/countrytownvestjylland/" target="_blank" rel="noopener noreferrer" className="text-black underline hover:opacity-70 transition-opacity">Country Town</a><span className="text-black"> and </span><a href="https://bkf.dk/soeg-stoette/arbejdsophold/huset-i-provence/" target="_blank" rel="noopener noreferrer" className="text-black underline hover:opacity-70 transition-opacity">Ane-Grete's Hus in Fox-Amphoux</a></p>
               </div>
               <div>
                 <p><span className="text-black">Supported by:</span> <span className="text-black">Region Skåne</span></p>
