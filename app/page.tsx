@@ -14,27 +14,47 @@ import {
 import { Card, CardContent } from "@/components/ui/card"
 import Navigation from "@/components/navigation"
 
+type SlideType = 'image' | 'video';
+
+type ImageSlide = {
+  type: 'image';
+  src: string;
+};
+
+type VideoSlide = {
+  type: 'video';
+  videoId: string;
+  title?: string;
+};
+
+type CarouselSlide = ImageSlide | VideoSlide;
+
 export default function HomePage() {
-  const images = [
-    "/shelf-media/01.webp",
-    "/shelf-media/2.webp",
-    "/shelf-media/3.webp",
-    "/shelf-media/4.webp",
-    "/shelf-media/5.webp",
-    "/shelf-media/6.webp",
-    "/shelf-media/7.webp",
-    "/shelf-media/9.webp",
-    "/shelf-media/10.webp",
-    "/shelf-media/11.webp",
-    "/shelf-media/12.webp",
-    "/shelf-media/13.webp",
-    "/shelf-media/14.webp",
-    "/shelf-media/15.webp",
-    "/shelf-media/16.webp",
-    "/shelf-media/17.webp",
-    "/shelf-media/18.webp",
-    "/shelf-media/20.webp",
-    "/shelf-media/21.webp",
+  const slides: CarouselSlide[] = [
+    {
+      type: 'video',
+      videoId: 'tYkDRLTtavA',
+      title: 'Shelf-life Opera Trailer'
+    },
+    { type: 'image', src: '/shelf-media/01.webp' },
+    { type: 'image', src: '/shelf-media/2.webp' },
+    { type: 'image', src: '/shelf-media/3.webp' },
+    { type: 'image', src: '/shelf-media/4.webp' },
+    { type: 'image', src: '/shelf-media/5.webp' },
+    { type: 'image', src: '/shelf-media/6.webp' },
+    { type: 'image', src: '/shelf-media/7.webp' },
+    { type: 'image', src: '/shelf-media/9.webp' },
+    { type: 'image', src: '/shelf-media/10.webp' },
+    { type: 'image', src: '/shelf-media/11.webp' },
+    { type: 'image', src: '/shelf-media/12.webp' },
+    { type: 'image', src: '/shelf-media/13.webp' },
+    { type: 'image', src: '/shelf-media/14.webp' },
+    { type: 'image', src: '/shelf-media/15.webp' },
+    { type: 'image', src: '/shelf-media/16.webp' },
+    { type: 'image', src: '/shelf-media/17.webp' },
+    { type: 'image', src: '/shelf-media/18.webp' },
+    { type: 'image', src: '/shelf-media/20.webp' },
+    { type: 'image', src: '/shelf-media/21.webp' },
   ]
 
   // Fixed width for all carousel items
@@ -96,52 +116,82 @@ export default function HomePage() {
 
   const openLightbox = (imageSrc: string, imageIndex: number) => {
     if (!isDragging) {
-      setLightboxImage(imageSrc)
-      setLightboxIndex(imageIndex)
-      setLightboxOpen(true)
+      const slide = slides[imageIndex];
+      if (slide.type === 'image') {
+        setLightboxImage(imageSrc)
+        setLightboxIndex(imageIndex)
+        setLightboxOpen(true)
+      }
     }
   }
 
   const navigateLightbox = (direction: 'prev' | 'next') => {
-    let newIndex
-    if (direction === 'prev') {
-      newIndex = lightboxIndex > 0 ? lightboxIndex - 1 : images.length - 1
-    } else {
-      newIndex = lightboxIndex < images.length - 1 ? lightboxIndex + 1 : 0
+    let currentIdx = lightboxIndex;
+    const findNextImageIndex = (startIdx: number, dir: 'prev' | 'next'): number => {
+      let idx = startIdx;
+      do {
+        idx = dir === 'prev'
+          ? (idx > 0 ? idx - 1 : slides.length - 1)
+          : (idx < slides.length - 1 ? idx + 1 : 0);
+
+        if (slides[idx].type === 'image') return idx;
+      } while (idx !== startIdx);
+      return startIdx;
+    };
+
+    const newIndex = findNextImageIndex(currentIdx, direction);
+    setLightboxIndex(newIndex);
+    if (slides[newIndex].type === 'image') {
+      setLightboxImage(slides[newIndex].src);
     }
-    setLightboxIndex(newIndex)
-    setLightboxImage(images[newIndex])
   }
 
   return (
-    <main className="relative min-h-screen w-full bg-white p-6 md:p-10 flex items-center">
-      <h1
-        className="absolute left-5 top-3 text-black"
-      >
-        <Link href="/" className="hover:opacity-70 transition-opacity">
-          Shelf-life an opera
-        </Link>
-      </h1>
-      <Navigation />
+    <>
+      <link rel="preconnect" href="https://www.youtube-nocookie.com" />
+      <link rel="dns-prefetch" href="https://www.youtube-nocookie.com" />
+      <main className="relative min-h-screen w-full bg-white p-6 md:p-10 flex items-center">
+        <h1
+          className="absolute left-5 top-3 text-black"
+        >
+          <Link href="/" className="hover:opacity-70 transition-opacity">
+            Shelf-life an opera
+          </Link>
+        </h1>
+        <Navigation />
       <Card className="mx-auto max-w-[1100px] w-full bg-white border-0 overflow-visible rounded-none">
         <CardContent className="pb-12 overflow-visible">
           <div className="relative">
             {/* Mobile: Vertical image flow */}
             <div className="md:hidden flex flex-col gap-4">
-              {images.map((src, i) => (
-                <div
-                  key={i}
-                  className="relative w-full aspect-[4/3] overflow-hidden bg-muted cursor-pointer hover:opacity-90 transition-opacity rounded-none"
-                  onClick={() => openLightbox(src, i)}
-                >
-                  <Image
-                    src={src}
-                    alt={`Image ${i + 1}`}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    priority={i < 3}
-                  />
+              {slides.map((slide, i) => (
+                <div key={i}>
+                  {slide.type === 'video' ? (
+                    <div className="relative w-full aspect-video overflow-hidden bg-black rounded-none">
+                      <iframe
+                        src={`https://www.youtube-nocookie.com/embed/${slide.videoId}?autoplay=1&mute=1&rel=0&modestbranding=1`}
+                        title={slide.title || 'Video'}
+                        className="absolute inset-0 w-full h-full"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                        style={{ border: 'none' }}
+                      />
+                    </div>
+                  ) : (
+                    <div
+                      className="relative w-full aspect-[4/3] overflow-hidden bg-muted cursor-pointer hover:opacity-90 transition-opacity rounded-none"
+                      onClick={() => openLightbox(slide.src, i)}
+                    >
+                      <Image
+                        src={slide.src}
+                        alt={`Image ${i + 1}`}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        priority={i < 3}
+                      />
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -167,26 +217,39 @@ export default function HomePage() {
                 className="w-full"
               >
                 <CarouselContent className="-ml-3" style={{ willChange: 'transform' }}>
-                  {images.map((src, i) => (
+                  {slides.map((slide, i) => (
                     <CarouselItem
                       key={i}
                       className={`pl-3 ${itemWidth}`}
                     >
-                      <div
-                        className="relative h-[322px] overflow-hidden bg-muted cursor-grab active:cursor-grabbing hover:opacity-90 transition-opacity rounded-none"
-                        style={{ transform: 'translateZ(0)', userSelect: 'none' }}
-                        onClick={() => openLightbox(src, i)}
-                      >
-                        <Image
-                          src={src}
-                          alt={`Slide ${i + 1}`}
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 768px) 100vw, 25vw"
-                          priority={i < 4}
-                          draggable={false}
-                        />
-                      </div>
+                      {slide.type === 'video' ? (
+                        <div className="relative h-[322px] overflow-hidden bg-black rounded-none">
+                          <iframe
+                            src={`https://www.youtube-nocookie.com/embed/${slide.videoId}?autoplay=1&mute=1&rel=0&modestbranding=1`}
+                            title={slide.title || 'Video'}
+                            className="absolute inset-0 w-full h-full"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowFullScreen
+                            style={{ border: 'none' }}
+                          />
+                        </div>
+                      ) : (
+                        <div
+                          className="relative h-[322px] overflow-hidden bg-muted cursor-grab active:cursor-grabbing hover:opacity-90 transition-opacity rounded-none"
+                          style={{ transform: 'translateZ(0)', userSelect: 'none' }}
+                          onClick={() => openLightbox(slide.src, i)}
+                        >
+                          <Image
+                            src={slide.src}
+                            alt={`Slide ${i + 1}`}
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 768px) 100vw, 25vw"
+                            priority={i < 4}
+                            draggable={false}
+                          />
+                        </div>
+                      )}
                     </CarouselItem>
                   ))}
                 </CarouselContent>
@@ -241,6 +304,7 @@ export default function HomePage() {
           </button>
         </div>
       )}
-    </main>
+      </main>
+    </>
   )
 }
