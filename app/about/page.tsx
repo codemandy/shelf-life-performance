@@ -17,7 +17,7 @@ export default function AboutPage() {
 
       <div className="container mx-auto max-w-4xl pt-24 md:pt-32 page-content text-black">
         <div className="space-y-8">
-          <h2 className="font-light leading-tight text-black">
+          <h2 className="font-light leading-tight text-black mb-6">
             About Shelf-life
           </h2>
 
@@ -36,7 +36,7 @@ export default function AboutPage() {
           </div>
           
           <div className="pt-8">
-            <h3 className="font-light mb-4">
+            <h3 className="font-light mb-6">
               Creative Team
             </h3>
             <div className="space-y-4">

@@ -13,7 +13,7 @@ export default function ContactPage() {
       
       <div className="container mx-auto max-w-4xl pt-24 md:pt-32 page-content">
         <div className="space-y-4">
-          <h3 className="text-black mb-4">Contact</h3>
+          <h3 className="text-black mb-6">Contact</h3>
           <div>
             <p className="text-black">Press / Bookings</p>
             <div className="space-y-1">
