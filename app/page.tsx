@@ -68,8 +68,6 @@ export default function HomePage() {
   const [lightboxIndex, setLightboxIndex] = React.useState(0)
   const [isDragging, setIsDragging] = React.useState(false)
 
-  const [isHovered, setIsHovered] = React.useState(false)
-
   React.useEffect(() => {
     if (!api) return
     setCount(api.scrollSnapList().length)
@@ -94,25 +92,6 @@ export default function HomePage() {
       api.off("scroll", onDrag)
     }
   }, [api])
-
-  // Continuous smooth auto-scroll
-  React.useEffect(() => {
-    if (!api || isHovered) return
-
-    const speed = 0.5 // pixels per frame (lower = slower)
-    let animationId: number
-
-    const scroll = () => {
-      const engine = api.internalEngine()
-      engine.scrollBody.useDuration(0)
-      engine.scrollTo.distance(-speed, false)
-      animationId = requestAnimationFrame(scroll)
-    }
-
-    animationId = requestAnimationFrame(scroll)
-
-    return () => cancelAnimationFrame(animationId)
-  }, [api, isHovered])
 
   const openLightbox = (imageSrc: string, imageIndex: number) => {
     if (!isDragging) {
@@ -197,11 +176,7 @@ export default function HomePage() {
             </div>
 
             {/* Desktop: Carousel */}
-            <div
-              className="hidden md:block"
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-            >
+            <div className="hidden md:block">
               <Carousel
                 setApi={setApi}
                 opts={{
